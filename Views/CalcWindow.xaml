@@ -11,6 +11,5 @@
         <vm:CalcWindowModelView/>
     </Window.DataContext>
     <Grid>
-        
     </Grid>
 </Window>

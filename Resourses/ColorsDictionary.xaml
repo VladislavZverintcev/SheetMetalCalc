@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SheetMetalCalc.Resourses">
+    <Color x:Key = "EnterDataBackground" A="255" R="255" G="250" B="205"/>
+    <Color x:Key = "ExistDataBackground" A="255" R="200" G="250" B="215"/>
+    <SolidColorBrush x:Key="EnterDataBackgroundBrush" Color="{StaticResource EnterDataBackground}"/>
+    <SolidColorBrush x:Key="ExistDataBackgroundBrush" Color="{StaticResource ExistDataBackground}"/>
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#FFCFCFCF"/>
+    <SolidColorBrush x:Key="ButtonBorderBrush" Color="Gray"/>
+    <SolidColorBrush x:Key="ButtonSelectBrush" Color="WhiteSmoke"/>
+    <SolidColorBrush x:Key="ButtonNonActivBrush" Color="Gray"/>
+    <SolidColorBrush x:Key="MainBackgroundBrush" Color="#FFE0E0E0"/>
+    <SolidColorBrush x:Key="ItemBorderBrush" Color="#FF494949"/>
+    <SolidColorBrush x:Key="TransparentBrush" Color="Transparent"/>
+</ResourceDictionary>
