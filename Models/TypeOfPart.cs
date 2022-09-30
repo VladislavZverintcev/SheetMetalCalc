@@ -8,5 +8,6 @@ namespace SheetMetalCalc.Models
 {
     public class TypeOfPart
     {
+        public string Name { get; set; }
     }
 }

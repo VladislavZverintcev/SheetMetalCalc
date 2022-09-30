@@ -86,6 +86,7 @@
     <Compile Include="ViewModels\TypeOfPartsManagerWindowModelView.cs" />
     <Compile Include="Views\Behaviors\AllowableCharactersTextBoxBehavior.cs" />
     <Compile Include="Views\Behaviors\SetPropertyAction.cs" />
+    <Compile Include="Views\Behaviors\TextBoxInputBehavior.cs" />
     <Compile Include="Views\CalcChapterUserControl.xaml.cs">
       <DependentUpon>CalcChapterUserControl.xaml</DependentUpon>
     </Compile>

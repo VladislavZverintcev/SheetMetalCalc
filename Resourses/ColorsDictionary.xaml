@@ -12,4 +12,5 @@
     <SolidColorBrush x:Key="MainBackgroundBrush" Color="#FFE0E0E0"/>
     <SolidColorBrush x:Key="ItemBorderBrush" Color="#FF494949"/>
     <SolidColorBrush x:Key="TransparentBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="ErrorBrush" Color="#FFFFB6B6"/>
 </ResourceDictionary>

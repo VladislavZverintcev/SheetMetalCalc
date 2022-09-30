@@ -8,7 +8,10 @@ namespace SheetMetalCalc.Models
 {
     public class Material
     {
-        public string Name { get; set; }
-        public double Density { get; set; }
+        public string Name { get; set; } // Марка
+        public double Density { get; set; } // Плотность
+        public double Height { get; set; } // Высота листа
+        public double Width { get; set; } // Ширина листа
+        public double Thickness { get; set; } //Толщина листа
     }
 }

@@ -18,19 +18,39 @@ namespace SheetMetalCalc.ViewModels
 
         private string nameOfMaterial;
         private double density;
+        private double thickness;
+        private double width;
+        private double height;
         #endregion Fields
 
         #region Properties
-        public double Density
-        {
-            get => density;
-            set => Set(ref density, value);
-        }
         public string NameOfMaterial
         {
             get => nameOfMaterial;
             set => Set(ref nameOfMaterial, value);
         }
+        public double Thickness
+        {
+            get => thickness;
+            set => Set(ref thickness, value);
+        }
+        public double Width
+        {
+            get => width;
+            set => Set(ref width, value);
+        }
+        public double Height
+        {
+            get => height;
+            set => Set(ref height, value);
+        }
+        public double Density
+        {
+            get => density;
+            set => Set(ref density, value);
+        }
+        
+        
 
         public ObservableCollection<Models.Material> ListOfMaterials
         {
@@ -68,7 +88,7 @@ namespace SheetMetalCalc.ViewModels
         }
         bool IsNewMaterialCorrect()
         {
-            if (!string.IsNullOrEmpty(NameOfMaterial) && Density > 0)
+            if (!string.IsNullOrEmpty(NameOfMaterial) && Density > 0 && Thickness > 0 && Width > 0 && Height > 0)
             {
                 if(!string.IsNullOrWhiteSpace(NameOfMaterial))
                 {
@@ -176,9 +196,17 @@ namespace SheetMetalCalc.ViewModels
                     var newMat = new Models.Material
                     {
                         Name = NameOfMaterial,
+                        Thickness = this.Thickness,
+                        Width = this.Width,
+                        Height = this.Height,
                         Density = this.Density
                     };
                     ListOfMaterials.Add(newMat);
+                    this.NameOfMaterial = string.Empty;
+                    Thickness = 0;
+                    Width = 0;
+                    Height = 0;
+                    Density = 0;
                 }, (obj) => { return IsNewMaterialCorrect();});
             }
         }

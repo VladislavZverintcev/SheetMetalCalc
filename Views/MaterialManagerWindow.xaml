@@ -8,7 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Behaviors="clr-namespace:SheetMetalCalc.Views.Behaviors"
         mc:Ignorable="d"
-        Title="Менеджер материалов" Height="450" Width="400"
+        Title="Менеджер материалов" Height="450" Width="600"
         x:Name="materialWindow"
         Background="{StaticResource MainBackgroundBrush}"
         MinWidth="400"
@@ -37,26 +37,109 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Имя материала:" Grid.Column="0"/>
-            <TextBlock Text="𝜌, кг/м^3:" Grid.Column="1"/>
+            <TextBlock Text="S, мм:" Grid.Column="1"/>
+            <TextBlock Text="X, мм:" Grid.Column="2"/>
+            <TextBlock Text="Y, мм:" Grid.Column="3"/>
+            <TextBlock Text="𝜌, кг/м^3:" Grid.Column="4"/>
         </Grid>
         <Border Grid.Row="2" Style="{StaticResource BorderStyle}" Background="{StaticResource EnterDataBackgroundBrush}" Margin="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="MaterialNameTB" Text="{Binding NameOfMaterial, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5">
+                <TextBox x:Name="MaterialNameTB" Text="{Binding NameOfMaterial, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5"/>
+                <TextBox x:Name="ThicknessTB" Grid.Column="1" Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" Margin="5">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                    <!--Не работает корректно-->
+                        <!--<i:Interaction.Behaviors>
+                        <Behaviors:TextBoxInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>-->
                 </TextBox>
-                <TextBox Grid.Column="1" Text="{Binding Density, UpdateSourceTrigger=PropertyChanged}" Margin="5" >
-                    <i:Interaction.Behaviors>
-                        <Behaviors:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9]+$" MaxLength="6" />
-                    </i:Interaction.Behaviors>
+                <TextBox x:Name="WidthTB" Grid.Column="2" Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" Margin="5">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                    <!--Не работает корректно-->
+                    <!--<i:Interaction.Behaviors>
+                        <Behaviors:TextBoxInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>-->
                 </TextBox>
-                <Button Content="➕" Grid.Column="2" Command="{Binding AddMaterialComm}" Style="{StaticResource ElipseButtonStyle}"/>
+                <TextBox x:Name="HeightTB" Grid.Column="3" Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" Margin="5">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                    <!--Не работает корректно-->
+                    <!--<i:Interaction.Behaviors>
+                        <Behaviors:TextBoxInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>-->
+                </TextBox>
+                <TextBox x:Name="DensityTB" Grid.Column="4" Text="{Binding Density, UpdateSourceTrigger=PropertyChanged}" Margin="5">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                    <!--Не работает корректно-->
+                    <!--<i:Interaction.Behaviors>
+                        <Behaviors:AllowableCharactersTextBoxBehavior RegularExpression="^[-+]?[0-9]*[.,]?[0-9]+(?:[eE][-+]?[0-9]+)?$" MaxLength="6" />
+                    </i:Interaction.Behaviors>-->
+                </TextBox>
+                
+                <Button x:Name="AddButton" Content="➕" Grid.Column="5" Command="{Binding AddMaterialComm}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ElipseButtonStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Background, ElementName=DensityTB}" Value="{StaticResource ErrorBrush}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Background, ElementName=ThicknessTB}" Value="{StaticResource ErrorBrush}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Background, ElementName=WidthTB}" Value="{StaticResource ErrorBrush}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Background, ElementName=HeightTB}" Value="{StaticResource ErrorBrush}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
         </Border>
 
@@ -65,18 +148,10 @@
             <ListBox x:Name="ListOfMaterials" ItemsSource="{Binding ListOfMaterials}" ItemContainerStyle="{StaticResource ListBoxItemStyle}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{StaticResource BorderStyle}" Background="{StaticResource ExistDataBackgroundBrush}" Margin="1">
-                            <Grid Width="Auto" Height="40">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="40"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox x:Name="MaterialNameTB" Text="{Binding Name}" Grid.Column="0" Margin="5" IsReadOnly="True"/>
-                                <TextBox Grid.Column="1" Text="{Binding Density}" Margin="5" IsReadOnly="True"/>
-                                <Button Content="➖" Grid.Column="2" DataContext="{Binding DataContext, ElementName=materialWindow}" Command="{Binding DeleteMaterialComm}" CommandParameter="{Binding TemplatedParent.Content, Mode=OneWay, RelativeSource={RelativeSource Self}}"  Style="{StaticResource ElipseButtonStyle}"/>
-                            </Grid>
-                        </Border>
+                        <local:CalcChapterUserControl DataContext="{Binding}">
+                            
+                        </local:CalcChapterUserControl>
+                        
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
